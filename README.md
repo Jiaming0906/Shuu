@@ -1,5 +1,8 @@
 ### Discord Bot - _Shuu_
 
-Run `node .\index.js` in the terminal to use.
+1. Run `node .\deploy-commands.js` in the terminal  
+2. Run `node .\index.js` in the terminal  
 
-You could use this bot for modding competition in Discord neatly.
+Your bot should be online now.  
+
+You could use this bot for modding competition in Discord neatly.  
