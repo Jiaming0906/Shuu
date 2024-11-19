@@ -24,11 +24,11 @@ module.exports = {
             const number = Math.random();
 
             if (number < 1/5) {
-                await interaction.reply({ content : `+#yes`} );
+                await interaction.reply({ content : `-# yes`} );
             } else if (number < 2/5) {
                 await interaction.reply({ content: `# big yes`} );
             } else if (number < 3/5) {
-                await interaction.reply({ content: `+#no`} );
+                await interaction.reply({ content: `-# no`} );
             } else if (number < 4/5) {
                 await interaction.reply({ content: `# big no`} );
             } else {
