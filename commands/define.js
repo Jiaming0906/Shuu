@@ -3,15 +3,12 @@
 const { SlashCommandBuilder, EmbedBuilder, inlineCode } = require('discord.js');
 //const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote, inlineCode, codeBlock, time } = require('discord.js');
 
-const cheerio = require('cheerio');
-const axios = require('axios');
-
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('define')
-        .setDescription('Defines a word')
-        .addStringOption(option => option.setName("word")
-            .setDescription("Word to define")
+        .setName('ask')
+        .setDescription('Ask magic ball')
+        .addStringOption(option => option.setName("question")
+            .setDescription("The question to ask")
             .setRequired(true))
         .setIntegrationTypes(0, 1)
         .setContexts(0, 1, 2),
@@ -20,43 +17,29 @@ module.exports = {
 
         //
         const { options } = interaction;
-        const word = options.getString('word');
-        const geturl = "https://www.dictionary.com/browse/" + word;
-
-        await interaction.deferReply();
+        const question = options.getString('question');
         
         try {
-            //web scrap
-            const axiosResponse = await axios.request({
-                method: "GET",
-                url: geturl,
-                headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-                }
-            })
+            //
+            const number = Math.random();
 
-            const $ = cheerio.load(axiosResponse.data);
+            if (number < 1/5) {
+                await interaction.reply({ content : `+# yes`} );
+            } else if (number < 2/5) {
+                await interaction.reply({ content: `# big yes`} );
+            } else if (number < 3/5) {
+                await interaction.reply({ content: `+# no`} );
+            } else if (number < 4/5) {
+                await interaction.reply({ content: `# big no`} );
+            } else {
+                await interaction.reply({ content: `maybe` } );
+            };
 
-            const htmlElement = $(".NZKOFkdkcvYgD3lqOIJw");
-
-            let definition = "";
-            htmlElement.each((i, div) => {
-
-                let toadd = $(div).text();
-                if (toadd[0] === " ") {
-                    definition += "-";
-                };
-                definition += toadd;
-                definition += "\n";
-            });
-
-            // const definition = htmlElement.text();
-            await interaction.editReply({ content: `${word}:\n${definition}-# From <${geturl}>` });
             return;
 
         } catch (err) {
             console.log(err);
-            await interaction.editReply({ content: `You gave a bad word.` });
+            await interaction.reply({ content: `You gave a bad question.` });
             return;
 
         };
