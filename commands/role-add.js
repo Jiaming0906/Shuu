@@ -10,15 +10,22 @@ module.exports = {
             .setRequired(true))
         .addRoleOption(option => option.setName("role")
             .setDescription("Choose the role to add")
-            .setRequired(true)),
+            .setRequired(true))
+        .setIntegrationTypes(0),
     
     async execute(interaction) {
         
         const { options } = interaction;
-        const targetUser = options.getUser("member");　
+        const targetUser = options.getUser("member");
         const targetRole = options.getRole("role");
 
         try {
+
+            if (!interaction.guild) {
+                await interaction.reply({ content: `Not a guild!` });
+                return;
+            };
+            
             //check if member has the role user is trying to add
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)
@@ -46,7 +53,7 @@ module.exports = {
                 return;
             };
 
-            console.log(`${interaction.user.username} used add-role`);
+            //console.log(`${interaction.user.username} used add-role`);
 
             await mem.roles.add(targetRole);
             await interaction.reply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)

@@ -10,20 +10,31 @@ module.exports = {
             .setRequired(true))
         .addRoleOption(option => option.setName("roletoadd")
             .setDescription("Choose the role to add")
-            .setRequired(true)),
+            .setRequired(true))
+        .setIntegrationTypes(0)
+        .setContexts(1)
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     
     async execute(interaction) {
+
+        //setintegrationtypes 0=guild 1=user
+        //setcontext = use in group chat=2, dm=0, servers=1
         
         const { options } = interaction;
         const rolecurrent = options.getRole("rolecurrent");
         const roletoadd = options.getRole("roletoadd");
+
+        if (!interaction.guild) {
+            await interaction.editReply({ content: `Not a guild!` });
+            return;
+        };
 
         try {
             //get all members
 
             await interaction.deferReply({ ephemeral: true });
 
-            memberGet = await interaction.guild.members.fetch();
+            memberGet = await interaction.guild.members.fetch(); 
 
             const list = [];
 
@@ -34,7 +45,7 @@ module.exports = {
                 }
             });
 
-            console.log(list);
+            //console.log(list);
 
             for (let i = 0; i < list.length; i++) {
                 m = await interaction.guild.members.cache.get(list[i]);
@@ -44,7 +55,7 @@ module.exports = {
 
             //await interaction.member.roles.add(targetRole);
             //await interaction.reply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)
-            await interaction.editReply({ content: `ok`, ephemeral: true });
+            await interaction.editReply({ content: `Done.`, ephemeral: true });
             return;
 
         } catch (err) {

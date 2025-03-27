@@ -7,7 +7,8 @@ module.exports = {
         .setDescription("Shows all with the specified role")
         .addRoleOption(option => option.setName("role")
             .setDescription("Choose the role")
-            .setRequired(true)),
+            .setRequired(true))
+        .setIntegrationTypes(0),
     
     async execute(interaction) {
         
@@ -17,7 +18,12 @@ module.exports = {
         try {
             //get all members
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply();
+
+            if (!interaction.guild) {
+                await interaction.editReply({ content: `Not a guild!` });
+                return;
+            };
 
             memberGet = await interaction.guild.members.fetch();
 
@@ -35,13 +41,13 @@ module.exports = {
 
             //await interaction.member.roles.add(targetRole);
             //await interaction.reply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)
-            await interaction.editReply({ content: `${list}`, ephemeral: true });
+            await interaction.editReply({ content: `${list}` });
             return;
 
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.reply({ content: "Error.", ephemeral: true });
             return;
         };
     }

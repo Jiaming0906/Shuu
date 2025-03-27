@@ -9,7 +9,8 @@ module.exports = {
             .setRequired(true))
         .addRoleOption(option => option.setName("role")
             .setDescription("Choose the role to remove")
-            .setRequired(true)),
+            .setRequired(true))
+        .setIntegrationTypes(0),
     
     async execute(interaction) {
 
@@ -18,6 +19,12 @@ module.exports = {
         const targetRole = options.getRole("role");　
 
         try {
+
+            if (!interaction.guild) {
+                await interaction.reply({ content: `Not a guild!` });
+                return;
+            };
+            
             //check if member has the role user is trying to remove 
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)

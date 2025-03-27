@@ -85,7 +85,7 @@ client.on(Events.InteractionCreate, async interaction => {
 //recieve dm message reports
 
 //reaction add
-// reaction remove 
+//reaction remove 
 
 // log bot onto discord
 
