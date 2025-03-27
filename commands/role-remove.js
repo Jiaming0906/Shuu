@@ -16,7 +16,7 @@ module.exports = {
 
         const { options } = interaction;
         const targetUser = options.getUser("member");
-        const targetRole = options.getRole("role");　
+        const targetRole = options.getRole("role");
 
         try {
 

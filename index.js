@@ -48,59 +48,71 @@ for (const file of commandFiles){
     client.commands.set(command.data.name, command);
 };
 
+//events path
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+    const filePath = path.join(eventsPath, file);
+    const event = require(filePath);
+
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args));
+    } else {
+        client.on(event.name, (...args) => event.execute(...args));
+    }
+};
+
 //welcome message
 
 //commands interaction
-client.once(Events.ClientReady, () => {
-    console.log("Ready to accept commands!");
-});
+// client.once(Events.ClientReady, () => {
+//     console.log("Ready to accept commands!");
+// });
 
-//commands interaction
-client.on(Events.InteractionCreate, async interaction => {
-    if (!interaction.isChatInputCommand()) return;
+// //commands interaction
+// client.on(Events.InteractionCreate, async interaction => {
+//     if (!interaction.isChatInputCommand()) return;
 
-    const command = client.commands.get(interaction.commandName);
+//     const command = client.commands.get(interaction.commandName);
 
-    if (!command) return;
+//     if (!command) return;
 
-    try {
-        await command.execute(interaction);
+//     try {
+//         await command.execute(interaction);
 
-    } catch (err){
-        console.log("index.js, client.on Events.InteractionCreate");
-        console.log("err message below".padEnd(50, "-"));
-        console.log(err);
-        console.log("-".padEnd(50, "-"));
+//     } catch (err){
+//         console.log("index.js, client.on Events.InteractionCreate");
+//         console.log("err message below".padEnd(50, "-"));
+//         console.log(err);
+//         console.log("-".padEnd(50, "-"));
 
-        await interaction.reply({
-            content: "Error. Please use the command in the server."
-        })
-    }
-});
+//         await interaction.reply({
+//             content: "Error. Please use the command in the server."
+//         })
+//     }
+// });
 
 //DM bot
-
 //bot message channel
-
 //recieve dm message reports
-
 //reaction add
 //reaction remove 
 
 // log bot onto discord
 
-client.on('ready', async (c) => {
-    console.log("Shuu is Online on Discord");
-    const currentTime = new Date();
-    console.log(`${currentTime}`);
+// client.on('ready', async (c) => {
+//     console.log("Assistant is Online on Discord");
+//     const currentTime = new Date();
+//     console.log(`${currentTime}`);
 
-    //activitytype set 
-    client.user.setActivity({
-        name: "the sunset",
-        type: ActivityType.Watching,
-    });
-    console.log("-".padEnd(50, "-"));
-});
+//     //activitytype set 
+//     client.user.setActivity({
+//         name: "BOSS",
+//         type: ActivityType.Listening,
+//     });
+//     console.log("-".padEnd(50, "-"));
+// });
 
 client.login(process.env.DISCORD_TOKEN);
 
