@@ -12,7 +12,6 @@ module.exports = {
             .setDescription("Choose the role to add")
             .setRequired(true))
         .setIntegrationTypes(0)
-        .setContexts(1)
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     
     async execute(interaction) {
@@ -23,11 +22,6 @@ module.exports = {
         const { options } = interaction;
         const rolecurrent = options.getRole("rolecurrent");
         const roletoadd = options.getRole("roletoadd");
-
-        if (!interaction.guild) {
-            await interaction.editReply({ content: `Not a guild!` });
-            return;
-        };
 
         try {
             //get all members
@@ -61,7 +55,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.editReply({ content: "I do not have permission to assign that role.", ephemeral: true });
             return;
         };
     }

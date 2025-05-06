@@ -59,7 +59,7 @@ module.exports = {
 
             //check if given hexcode is valid
             if (!/^#?([A-Fa-f0-9]{6})$/.test(hexcode)){
-                await interaction.editReply({ content: `Please provide a valid hexcode. Example: #000000, with or without # symbol is all OK!` });
+                await interaction.editReply({ content: `Please provide a valid hexcode.\nExample: #000000, with or without # symbol is all OK!` });
                 return;
             };
 

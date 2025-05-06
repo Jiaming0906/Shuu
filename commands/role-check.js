@@ -20,11 +20,6 @@ module.exports = {
 
             await interaction.deferReply();
 
-            if (!interaction.guild) {
-                await interaction.editReply({ content: `Not a guild!` });
-                return;
-            };
-
             memberGet = await interaction.guild.members.fetch();
 
             let list = ``;
@@ -47,7 +42,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: "Error.", ephemeral: true });
+            await interaction.editReply({ content: "Error.", ephemeral: true });
             return;
         };
     }

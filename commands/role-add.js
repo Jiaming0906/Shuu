@@ -21,19 +21,16 @@ module.exports = {
 
         try {
 
-            if (!interaction.guild) {
-                await interaction.reply({ content: `Not a guild!` });
-                return;
-            };
+            await interaction.deferReply({ ephemeral: true });
             
             //check if member has the role user is trying to add
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)
             
             if (memberGet) {
-                await interaction.reply({ content: `<@${targetUser.id}> has the Role ${targetRole} already!`, ephemeral: true });
+                await interaction.editReply({ content: `<@${targetUser.id}> has the Role ${targetRole} already!`, ephemeral: true });
                 return;
-            }
+            };
 
             //check if bot has permission to add the role 
             
@@ -49,20 +46,20 @@ module.exports = {
             const rolePosition = targetRole.position;
 
             if (rolePosition >= positionBotRole || targetRole.tags) {
-                await interaction.reply({ content: `I do not have the permission to add this role.`, ephemeral: true });
+                await interaction.editReply({ content: `I do not have the permission to add this role.`, ephemeral: true });
                 return;
             };
 
             //console.log(`${interaction.user.username} used add-role`);
 
             await mem.roles.add(targetRole);
-            await interaction.reply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)
+            await interaction.editReply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)
             return;
 
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.editReply({ content: "I do not have permission to assign that role.", ephemeral: true });
             return;
         };
     }

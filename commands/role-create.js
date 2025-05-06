@@ -9,6 +9,7 @@ module.exports = {
             .setDescription("Name of the role to be created")
             .setRequired(true))
         .setIntegrationTypes(0),
+        
     async execute(interaction) {
 
         const { options } = interaction;
@@ -18,7 +19,7 @@ module.exports = {
         try {
             await interaction.guild.roles.create({
                 name: `${name}`,
-                position: 1,
+                position: 2,
             });
 
             await interaction.reply({ content: `Role created for ${inlineCode(name)}`, ephemeral: true });                    

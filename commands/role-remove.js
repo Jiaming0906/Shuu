@@ -20,17 +20,14 @@ module.exports = {
 
         try {
 
-            if (!interaction.guild) {
-                await interaction.reply({ content: `Not a guild!` });
-                return;
-            };
+            await interaction.deferReply({ ephemeral: true });
             
             //check if member has the role user is trying to remove 
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)
             
             if (!memberGet) {
-                await interaction.reply({ content: `<@${targetUser.id}> does not have the Role ${targetRole}!`, ephemeral: true });
+                await interaction.editReply({ content: `<@${targetUser.id}> does not have the Role ${targetRole}!`, ephemeral: true });
                 return;
             }
 
@@ -48,18 +45,18 @@ module.exports = {
             const rolePosition = targetRole.position;
 
             if (rolePosition >= positionBotRole || targetRole.tags) {
-                await interaction.reply({ content: `I do not have the permission to remove this role.`, ephemeral: true });
+                await interaction.editReply({ content: `I do not have the permission to remove this role.`, ephemeral: true });
                 return;
             };
 
             await mem.roles.remove(targetRole);
-            await interaction.reply(`Role ${targetRole} has been removed from <@${targetUser.id}>.`)
+            await interaction.editReply(`Role ${targetRole} has been removed from <@${targetUser.id}>.`)
             return;
 
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: `Error. You could be trying to remove a role that I don't have the permissions to.`, ephemeral: true });
+            await interaction.editReply({ content: `Error. You could be trying to remove a role that I don't have the permissions to.`, ephemeral: true });
             return;
         };
     }
