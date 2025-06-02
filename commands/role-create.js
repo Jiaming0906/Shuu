@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, inlineCode } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, inlineCode, MessageFlags } = require('discord.js');
 //const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote, inlineCode, codeBlock, time } = require('discord.js');
 
 module.exports = {
@@ -19,14 +19,17 @@ module.exports = {
         try {
             await interaction.guild.roles.create({
                 name: `${name}`,
-                position: 2,
+                //position: 2,
             });
 
-            await interaction.reply({ content: `Role created for ${inlineCode(name)}`, ephemeral: true });                    
+            await interaction.reply({ content: `Role created for ${inlineCode(name)}`, flags: MessageFlags.Ephemeral });                    
             return;
 
         } catch(err) {
             console.log(err);
+            await interaction.reply({ content: "Please move the bot to a higher position.", flags: MessageFlags.Ephemeral });
+            return;
+
         };
 
     }

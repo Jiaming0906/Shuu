@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, PermissionFlagsBits, MessageFlags } = require("discord.js");
 //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 
 module.exports = {
@@ -21,14 +21,14 @@ module.exports = {
 
         try {
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: MessageFlags.Ephemeral });
             
             //check if member has the role user is trying to add
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)
             
             if (memberGet) {
-                await interaction.editReply({ content: `<@${targetUser.id}> has the Role ${targetRole} already!`, ephemeral: true });
+                await interaction.editReply({ content: `<@${targetUser.id}> has the Role ${targetRole} already!`, flags: MessageFlags.Ephemeral });
                 return;
             };
 
@@ -46,7 +46,7 @@ module.exports = {
             const rolePosition = targetRole.position;
 
             if (rolePosition >= positionBotRole || targetRole.tags) {
-                await interaction.editReply({ content: `I do not have the permission to add this role.`, ephemeral: true });
+                await interaction.editReply({ content: `I do not have the permission to add this role.`, flags: MessageFlags.Ephemeral });
                 return;
             };
 
@@ -59,7 +59,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.editReply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.editReply({ content: "I do not have permission to assign that role.", flags: MessageFlags.Ephemeral });
             return;
         };
     }

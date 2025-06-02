@@ -12,23 +12,23 @@ module.exports = {
         //
         try {
             //get the role
-            const role = await member.guild.roles.fetch(roleId);
-            if (!role) throw new Error("Role not found.");
+            // const role = await member.guild.roles.fetch(roleId);
+            // if (!role) throw new Error("Role not found.");
 
             //assign the role
             // await member.roles.add(role);
 
             //add to queue
-            if (role) {
-                roleQueue.add(member, roleId);
-            };
+            // if (role) {
+            //     roleQueue.add(member, roleId);
+            // };
 
             //send welcome message
-            const welcomeChannel = await member.guild.channels.fetch(welcomeChannelId);
+            // const welcomeChannel = await member.guild.channels.fetch(welcomeChannelId);
 
-            if (welcomeChannel) {
-                await welcomeChannel.send(`Welcome ${member}!`);
-            };
+            // if (welcomeChannel) {
+            //     await welcomeChannel.send(`Welcome ${member}!`);
+            // };
         } catch (error) {
             console.log("Error in new member events handler", error);
         };

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, PermissionFlagsBits, MessageFlags } = require("discord.js");
 //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.reply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.reply({ content: "Error." });
             return;
         };
     }

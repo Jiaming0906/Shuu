@@ -2,7 +2,7 @@
 // above is the regex expression to check if string matches hex code
 // console.log(/^([a-z0-9]{5,})$/.test('abc12')); // true
 
-const { SlashCommandBuilder, EmbedBuilder, inlineCode, PermissionFlagsBits, PermissionsBitField } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, inlineCode, PermissionFlagsBits, PermissionsBitField, MessageFlags } = require('discord.js');
 //const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote, inlineCode, codeBlock, time } = require('discord.js');
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, PermissionFlagsBits, MessageFlags } = require("discord.js");
 //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 
 module.exports = {
@@ -42,7 +42,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.editReply({ content: "Error.", ephemeral: true });
+            await interaction.editReply({ content: "Error." });
             return;
         };
     }

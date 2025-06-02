@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, EmbedBuilder, MessageFlags } = require("discord.js");
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require("discord.js");
 
 module.exports = {

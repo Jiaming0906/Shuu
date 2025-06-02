@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, PermissionFlagsBits, MessageFlags } = require("discord.js");
 //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
         try {
             //get all members
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
             memberGet = await interaction.guild.members.fetch(); 
 
@@ -49,13 +49,13 @@ module.exports = {
 
             //await interaction.member.roles.add(targetRole);
             //await interaction.reply(`Role ${targetRole} has been added for <@${targetUser.id}>.`)
-            await interaction.editReply({ content: `Done.`, ephemeral: true });
+            await interaction.editReply({ content: `Done.`, flags: MessageFlags.Ephemeral });
             return;
 
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.editReply({ content: "I do not have permission to assign that role.", ephemeral: true });
+            await interaction.editReply({ content: "I do not have permission to assign that role.", flags: MessageFlags.Ephemeral });
             return;
         };
     }

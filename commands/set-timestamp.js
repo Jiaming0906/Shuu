@@ -1,6 +1,6 @@
 //flips a coin and returns heads or tails
 
-const { SlashCommandBuilder, EmbedBuilder, inlineCode } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, inlineCode, MessageFlags } = require('discord.js');
 //const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote, inlineCode, codeBlock, time } = require('discord.js');
 
 module.exports = {

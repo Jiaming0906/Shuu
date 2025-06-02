@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, inlineCode, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, inlineCode, PermissionFlagsBits, MessageFlags } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,14 +20,14 @@ module.exports = {
 
         try {
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: MessageFlags.Ephemeral });
             
             //check if member has the role user is trying to remove 
             mem = await interaction.guild.members.cache.get(targetUser.id);
             memberGet = await mem.roles.cache.has(targetRole.id)
             
             if (!memberGet) {
-                await interaction.editReply({ content: `<@${targetUser.id}> does not have the Role ${targetRole}!`, ephemeral: true });
+                await interaction.editReply({ content: `<@${targetUser.id}> does not have the Role ${targetRole}!`, flags: MessageFlags.Ephemeral });
                 return;
             }
 
@@ -45,7 +45,7 @@ module.exports = {
             const rolePosition = targetRole.position;
 
             if (rolePosition >= positionBotRole || targetRole.tags) {
-                await interaction.editReply({ content: `I do not have the permission to remove this role.`, ephemeral: true });
+                await interaction.editReply({ content: `I do not have the permission to remove this role.`, flags: MessageFlags.Ephemeral });
                 return;
             };
 
@@ -56,7 +56,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             console.log("-".padEnd(39, "-"));
-            await interaction.editReply({ content: `Error. You could be trying to remove a role that I don't have the permissions to.`, ephemeral: true });
+            await interaction.editReply({ content: `Error. You could be trying to remove a role that I don't have the permissions to.`, flags: MessageFlags.Ephemeral });
             return;
         };
     }
