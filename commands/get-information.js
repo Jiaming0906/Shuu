@@ -14,6 +14,7 @@ module.exports = {
     async execute(interaction) {
         
         // add defer reply
+        await interaction.deferReply();
 
         const textToSave = interaction.options.getString('text');
         const timestamp = new Date().toLocaleString('en-US', {
@@ -32,29 +33,29 @@ module.exports = {
         try {
             if (textToSave) {
                 // Save mode with timestamp
-                const entry = `[${timestamp}]\n${textToSave}\n`;
+                const entry = `-# [${timestamp}]\n${textToSave}\n`;
                 fs.appendFileSync(TEXT_FILE_PATH, entry);
                 
-                await interaction.reply({
-                    content: `Text saved!\n-# ${timestamp}`,
+                await interaction.editReply({
+                    content: `OK!\n-# ${timestamp}`,
                 });
             } else {
                 // Retrieve mode
                 if (!fs.existsSync(TEXT_FILE_PATH) || fs.readFileSync(TEXT_FILE_PATH, 'utf8').trim() === '') {
-                    return interaction.reply({
+                    return interaction.editReply({
                         content: 'No text has been saved yet.',
                     });
                 }
 
                 const savedText = fs.readFileSync(TEXT_FILE_PATH, 'utf8');
-                await interaction.reply({
-                    content: `📝\`\`\`\n${savedText}\`\`\``,
+                await interaction.editReply({
+                    content: `${savedText}`,
                 });
             }
         } catch (error) {
             console.error('Error handling savedtext:', error);
-            await interaction.reply({
-                content: '❌ Failed to access text storage.',
+            await interaction.editReply({
+                content: 'Failed to access text storage.',
             });
         }
     }

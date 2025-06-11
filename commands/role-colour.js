@@ -74,7 +74,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
             .setColor(newcolour)
-            .setDescription(`I have changed the colour of ${rolegiven} from hexcode: ${oldcolour} to hexcode: ${newcolour}.<:emoji_2:1354749143347892274>`)
+            .setDescription(`I have changed the colour of ${rolegiven} from hexcode \`${oldcolour}\` to hexcode \`${newcolour}\`.<:emoji_2:1354749143347892274>`)
             //.setFooter({ text: `If this change was by accident, please change the role back to its original colour. Thank you!` })
             
             await rolegiven.setColor(hexcode);

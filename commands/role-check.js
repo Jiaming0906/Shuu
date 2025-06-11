@@ -22,7 +22,7 @@ module.exports = {
 
             memberGet = await interaction.guild.members.fetch();
 
-            let list = ``;
+            let list = `With the role:\n`;
 
             memberGet.forEach((member) => {
                 if (member.roles.cache.has(rolecurrent.id)) {

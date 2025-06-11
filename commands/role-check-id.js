@@ -16,9 +16,12 @@ module.exports = {
         const { options } = interaction;
         const targetRole = options.getRole("role");
 
+        //console.log for testing
+        console.log(targetRole.toJSON());
+
         try {
 
-            await interaction.reply({ content: `name = ${targetRole.name}\ncolour = ${targetRole.hexColor}\nid = ${targetRole.id}\nposition = ${targetRole.position}\n-# created on ${targetRole.createdAt}` });
+            await interaction.reply({ content: `\`\`\`name        ${targetRole.name}\ncolour      ${targetRole.hexColor}\nid          ${targetRole.id}\nposition    ${targetRole.position}\nmentionable ${targetRole.mentionable}\`\`\`\n-# created on ${targetRole.createdAt}` });
             return;
 
         } catch (err) {
