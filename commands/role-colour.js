@@ -42,14 +42,17 @@ module.exports = {
             const rolesAll = []; //list of all roles in the guild
             await interaction.guild.roles.cache.forEach(role => rolesAll.push(role));
 
+            //console.log(rolesAll);
+
             const allBotRoles = rolesAll.filter(role => role.tags);
-            const botRole = allBotRoles.filter(role => role.tags.botId === "1164417246643367968");
+            const botRole = allBotRoles.filter(role => role.tags.botId === "1177117634207158312");
             const positionBotRole = botRole[0].position;
 
             //get position of role to add
             const rolePosition = rolegiven.position;
 
-            if (rolePosition >= positionBotRole || rolegiven.tags) {
+            if (rolePosition >= positionBotRole) {
+                console.log(`Role position: ${rolePosition}, Bot role position: ${positionBotRole}`);
                 await interaction.editReply({ content: `I do not have the permission to change colour of this role.` });
                 return;
             };

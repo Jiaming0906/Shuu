@@ -1,4 +1,4 @@
-//flips a coin and returns heads or tails
+//set-timestamp.js
 
 const { SlashCommandBuilder, EmbedBuilder, inlineCode, MessageFlags } = require('discord.js');
 //const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote, inlineCode, codeBlock, time } = require('discord.js');

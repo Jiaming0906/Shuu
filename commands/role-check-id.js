@@ -17,11 +17,13 @@ module.exports = {
         const targetRole = options.getRole("role");
 
         //console.log for testing
-        console.log(targetRole.toJSON());
+        //console.log(targetRole.toJSON());
+        const roleJSON = targetRole.toJSON();
+        const roleString = JSON.stringify(roleJSON, null, 2);
 
         try {
 
-            await interaction.reply({ content: `\`\`\`name        ${targetRole.name}\ncolour      ${targetRole.hexColor}\nid          ${targetRole.id}\nposition    ${targetRole.position}\nmentionable ${targetRole.mentionable}\`\`\`\n-# created on ${targetRole.createdAt}` });
+            await interaction.reply({ content: `\`\`\`name        ${targetRole.name}\ncolour      ${targetRole.hexColor}\n${roleString}\`\`\`\n-# created on ${targetRole.createdAt}` });
             return;
 
         } catch (err) {

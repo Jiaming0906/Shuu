@@ -24,11 +24,11 @@ module.exports = {
             // };
 
             //send welcome message
-            // const welcomeChannel = await member.guild.channels.fetch(welcomeChannelId);
+            const welcomeChannel = await member.guild.channels.fetch(welcomeChannelId);
 
-            // if (welcomeChannel) {
-            //     await welcomeChannel.send(`Welcome ${member}!`);
-            // };
+            if (welcomeChannel) {
+                await welcomeChannel.send(`Welcome ${member}!`);
+            };
         } catch (error) {
             console.log("Error in new member events handler", error);
         };
